@@ -25,7 +25,18 @@ public class PlayMakerSpeechRecognitionProxy : MonoBehaviour
 
     void Start(){}
 
+    
     private void OnEnable()
+    {
+       Mount();
+    }
+    
+    private void OnDisable()
+    {
+       UnMount();
+    }
+
+    void Mount()
     {
         if (keywords != null)
         {
@@ -34,9 +45,7 @@ public class PlayMakerSpeechRecognitionProxy : MonoBehaviour
             recognizer.Start();
         }
     }
-
-
-    private void OnDisable()
+    void UnMount()
     {
         if (recognizer != null && recognizer.IsRunning)
         {
@@ -45,6 +54,7 @@ public class PlayMakerSpeechRecognitionProxy : MonoBehaviour
             recognizer = null;
         }
     }
+    
 
 
     private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -59,5 +69,13 @@ public class PlayMakerSpeechRecognitionProxy : MonoBehaviour
 
         OnPhraserecognizesEvent.SendEvent(null, eventTarget);
     }
+
+    public void SetKeyword(string[] newKeywords )
+    {
+        this.keywords = newKeywords;
+        UnMount();
+        Mount();
+    }
+    
 
 }
