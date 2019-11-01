@@ -12,6 +12,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 		
 		[Tooltip("The keywords")]
+		[ArrayEditor(VariableType.String)]
 		public FsmArray keywords;
 
 				
